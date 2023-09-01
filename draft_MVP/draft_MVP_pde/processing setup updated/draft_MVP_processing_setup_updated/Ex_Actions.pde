@@ -1,8 +1,9 @@
+//declaring Litmus paper button
 class LPButton {
   float x, y;
   float w = 72.08, h = 10;
 
-  color fillColor = #76C0FF;
+  color fillColor = #077CDD;
 
   boolean LPactive = false;
 
@@ -18,28 +19,28 @@ class LPButton {
   void draw () {
     noStroke ();
     fill (fillColor);
-    rect (x, y, w, h, 4);
+    rect (x, y, w, h);
 
     float alphaP = 0;
     if (LPactive) {
-      alphaP = 0;
+      alphaP = 0.7;
     } else {
       if (hovered ()) {
         if (mousePressed) {
           alphaP = 0;
         } else {
-          alphaP = 0.6;
+          alphaP = 0.7;
         }
       } else {
-        alphaP = 0.8;
+        alphaP = 0.3;
       }
     }
 
     fill (255, 255 * alphaP);
-    rect (x, y, w, h, 4);
+    rect (x, y, w, h);
 
     fill (0);
-    textSize (11);
+    textSize (8);
     textAlign (CENTER, CENTER);
     text (label, x + w/2, y + h/2);
   }

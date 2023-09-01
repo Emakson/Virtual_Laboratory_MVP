@@ -4,8 +4,8 @@ void navigationBars_draw () {
   containers.draw ();
   indicators.draw ();
   tools.draw();
-  //LP buttons
-  litmuspaper.draw();
+   //LP buttons
+
   //cards
   if (containers.active == true) {
     beakers.draw ();
@@ -23,6 +23,17 @@ void navigationBars_draw () {
   if (tools.active == true) { 
     Magnifier.draw ();
   }
+}
+
+void containers_draw () {
+  if (container.active)
+    container.draw ();
+
+
+  container2.draw ();
+  
+  if (litmuspaper.LPactive)
+    litmuspaper.draw();
 }
 
 void navigationBars_mouseReleased () {
@@ -62,30 +73,37 @@ void navigationBars_mouseReleased () {
 }
 
 void chemicals_mouseReleased () {
-  if (Acids.hovered ()) {
-    container.imageHold1 (FilledB);
-  }
-  if (neutral.hovered ()) {
-    container.imageHold1 (FilledB);
-  }
-  if (Alkaline.hovered ()) {
-    container.imageHold1 (FilledB);
+  if (container.active) {
+    if (Acids.hovered ()) {
+      container.imageHold1 (FilledB);
+    }
+    if (neutral.hovered ()) {
+      container.imageHold1 (FilledB);
+    }
+    if (Alkaline.hovered ()) {
+      container.imageHold1 (FilledB);
+    }
   }
 }
 void containers_mouseReleased () {
   if (beakers.hovered ()) {
     container.hold (beakers);
+    container.image = loadImage ("D:/Assets/Containers/Beakers.png");
+    container.active = true;
   }
   if (flask.hovered ()) {
     container.hold (flask);
+   // container.active = true;
   }
   if (testtube.hovered ()) {
     container.hold (testtube);
+    //container.active = true;
   }
 }
 void indicators_mouseReleased () {
   if (LPaper.hovered ()) {
-    container.hold (LPaper);
+    container.ButtonHold (litmuspaper);
+    litmuspaper.LPactive = true;
   }
 }
 void tools_mouseReleased () {
@@ -94,7 +112,13 @@ void tools_mouseReleased () {
   }
 }
 void litmuspaper_mouseReleased () {
-  if (litmuspaper.hovered ()) {
-    container.imagehold2 (BwL);
-  }
+  container.imagehold2 (BwL);
+  litmuspaper.LPactive = false;
+}
+float x = 688.87;
+float y = 341.89;
+float w = 11;
+float h = 32;
+boolean regionHovered () {
+  return mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h;
 }

@@ -1,21 +1,35 @@
 String FilledBPath ="D:/Assets/ex Action/Solution filled Beaker.png";
 String LPath ="D:/Assets/indicators/Litmus Paper2.png";
 String BwLpath ="D:/Assets/ex Action/Beaker with LP.png";
-PImage FilledB, LP, BwL;
+String ChLpath ="D:/Assets/ex Action/Colour changed LP.png";
+
+//String textpath ="D:/Assets/Texts/objective meet.png";
+String tablepath ="D:/Assets/Table.png";
+String cBeakerPath = "D:/Assets/Containers/Beakers - Empty.png";
+PImage FilledB, LP, BwL, ChL, objectivemeet, table;
+PImage cBeaker;
+//class
 LPButton litmuspaper;
 Buttons chemicals, containers, indicators, tools;
 Cards beakers, flask, testtube, Acids, neutral, Alkaline, LPaper, Magnifier;
 Container container;
 Container2 container2;
 
+
 void setup () {
   FilledB = loadImage (FilledBPath);
   BwL = loadImage (BwLpath);
+  ChL = loadImage (ChLpath);
   size (1366, 768);
+
+  table = loadImage(tablepath);
+  
+  cBeaker = loadImage (cBeakerPath);
 
   robotoM = createFont ("C:/Users/FSP/Downloads/Telegram Desktop/Roboto/Fonts/roboto-medium.ttf", 11);
   textFont (robotoM);
-
+  //Welcome text
+  println ("WELCOME TO OUR VIRTUAL LABORATORY");
   // Buttons
   chemicals = new Buttons ("CHEMICALS", #B17DFC, 57, 574);
   containers = new Buttons ("CONTAINERS", #10CCEB, 209, 574);
@@ -23,11 +37,11 @@ void setup () {
   tools = new Buttons ("TOOLS", #797979, 513, 574);
 
   chemicals.active = true;
-  //LP Buttons
-  litmuspaper = new LPButton ("litmus Paper", #76C0FF, 775, 347);
+  litmuspaper = new LPButton ("", #077CDD, 775, 347);
+  
   // Cards
 
-  beakers = new Cards ("BEAKERS", "D:/Assets/Containers/Beakers.png", containers.fillColor, 49, 631);
+  beakers = new Cards ("BEAKERS", cBeakerPath, containers.fillColor, 49, 631);
   flask = new Cards ("FLASK", "D:/Assets/Containers/Flask.png", containers.fillColor, 201, 631);
   testtube = new Cards ("TESTTUBE", "D:/Assets/Containers/Test Tube.png", containers.fillColor, 353, 631);
   Acids = new Cards ("ACIDS", "D:/Assets/chemicals/Acids.png", chemicals.fillColor, 49, 631);
@@ -44,27 +58,35 @@ void setup () {
 
 void draw () {
   background (255);
-
-  container.draw ();
-  container2.draw ();
+  //drawing navigation bars
+  imageMode (CENTER);
+  image (table, width/2, height/2);
   navigationBars_draw ();
+  containers_draw ();
 }
 
 void mouseReleased () {
+  // Controls the navigation of nav bars
   navigationBars_mouseReleased ();
+
+  // Controls which card from the selected nav bar to be selected
   if (containers.active) {
     containers_mouseReleased ();
-  }
-  if (chemicals.active) {
+  } else if (chemicals.active) {
     chemicals_mouseReleased ();
-  }
-  if (indicators.active) {
+  } else if (indicators.active) {
     indicators_mouseReleased ();
-  }
-  if (tools.active) {
+  } else if (tools.active) {
     tools_mouseReleased ();
   }
   if (litmuspaper.hovered ()) {
     litmuspaper_mouseReleased();
+  }
+  //control mouse location
+  if (regionHovered()) {
+    container.imageHold1 (FilledB);
+    container2.imagehold3 (ChL);
+    println ("          objective meet");
+    println ("#" + "It is an acid.");
   }
 }
