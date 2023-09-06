@@ -1,10 +1,9 @@
 class Component {
   PShape shape;
 
-
   float x, y;
   float w, h;
-  float PreX, PreY;
+  float preX, preY;
   float pressedX, pressedY, releasedX, releasedY;
 
   boolean isMovable;
@@ -45,14 +44,26 @@ class Component {
   void mousePressed () {
     pressedX = mouseX;
     pressedY = mouseY;
-    PreX = x;
-    PreY = y;
+    preX = x;
+    preY = y;
   }
 
   void mouseDragged () {
     if (flask.hovered()) {
-      x = PreX + (mouseX - pressedX);
-      y = PreY + (mouseY - pressedY);
+      x = preX + (mouseX - pressedX);
+      y = preY + (mouseY - pressedY);
+    }
+     if (burette.hovered()) {
+      x = preX + (mouseX - pressedX);
+      y = preY + (mouseY - pressedY);
+    }
+      if (stopcock.hovered()) {
+      x = preX + (mouseX - pressedX);
+      y = preY + (mouseY - pressedY);
+    }
+      if (ppt.hovered()) {
+      x = preX + (mouseX - pressedX);
+      y = preY + (mouseY - pressedY);
     }
   }
 
@@ -61,13 +72,18 @@ class Component {
     releasedY = mouseY;
 
     if (y + h < tableTopY) {
-      x = PreX;
-      y = PreY;
+      x = preX;
+      y = preY;
     }
-    if ( x + w < regionx + regionW && x + w < regiony + regionH){
+    if ( x+w > regionx && x + w < regionx + regionW && y + h > regiony && y + h < regiony + regionH){
       
      x = validx;
      y = validy - h;
+  }
+      if ( x+w > Tregionx && x + w < Tregionx + TregionW && y + h > Tregiony && y + h < Tregiony + TregionH){
+      
+     x = Tvalidx;
+     y = Tvalidy - h;
   }
 }
 }

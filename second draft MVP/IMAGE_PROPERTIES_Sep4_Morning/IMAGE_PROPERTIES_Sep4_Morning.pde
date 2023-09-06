@@ -1,18 +1,29 @@
-Component flask, stand, stopcock, burette, ppt;
-
+Component flask, stand, stopcock, burette, ppt, burettRotated, buretteWithstopcoke;
+int ClickCount = 0;
 String backgroundImagePath = "D:/Assets/background - e.png";
 
-PImage backgroundImage;
+String buretteUprightPath = "D:/Assets - SVG/buerette with stop cock - E - upright.svg";
+String buretteHorizontalPath = "D:/Assets - SVG/burette with stope cock -E.svg";
+
+PImage backgroundImage, burrete;
+PShape buretteUpright, buretteHorizontal;
+
 float tableTopY = 397;
-float regionx = 519, regiony= 396, regionW = 186, regionH = 142, validx = 604, validy = 477, validW = 99;
+float tableBottomY = 555; 
 float Tregionx = 1208, Tregiony= 253, TregionW = 158, TregionH = 224, Tvalidx = 1258, Tvalidy = 477, TvalidW = 99;
+
 
 void setup () {
   size (1366, 768);
 
   backgroundImage = loadImage (backgroundImagePath);
 
+  buretteUpright = loadShape (buretteUprightPath);
+  buretteHorizontal = loadShape (buretteHorizontalPath);
+
   flask = new Component ("D:/Assets - SVG/flask - E.svg", 744.5, 319.79);
+  flask.setRegionPpts(460, 432, 604, 477, 250, 100, 99, 1);
+  flask.regionToCheck = BOTTOM;
   flask.isFillable = true;
   flask.isMovable = true;
   flask.isSelectable = true;
@@ -24,19 +35,16 @@ void setup () {
   stand.isSelectable = false;
   stand.isShakable = false;
 
-  stopcock = new Component ("D:/Assets - SVG/stop cock - E.svg", 744.42, 484.09);
-  stopcock.isFillable = false;
-  stopcock.isMovable = true;
-  stopcock.isSelectable = true;
-  stopcock.isShakable = false; 
-
-  burette = new Component ("D:/Assets - SVG/buerette - E.svg", 863.54, 380.78);
+  burette = new Component (buretteHorizontal, 863.54, 380.78);
+  burette.setRegionPpts(485, 80, 568, 80, 200, 340, 1, 315);
+  burette.regionToCheck = LEFT;
   burette.isFillable = true;
   burette.isMovable = true;
   burette.isSelectable = true;
   burette.isShakable = false;
 
   ppt = new Component ("D:/Assets - SVG/ppt - E.svg", 910.07, 488.87);
+  ppt.setRegionPpts(617, 267, 659, 327, 80, 69, 33, 3);
   ppt.isFillable = false;
   ppt.isMovable = true;
   ppt.isSelectable = true;
@@ -51,36 +59,47 @@ void draw () {
   flask.draw ();
   stand.draw();
   burette.draw ();
-  stopcock.draw();
+
   ppt.draw();
 }
 
 void mousePressed () {
   flask.mousePressed ();
   burette.mousePressed ();
-  stopcock.mousePressed ();
+
   ppt.mousePressed ();
 }
 
 void mouseDragged () {
   if (flask.hovered()) {
     flask.mouseDragged();
-  }
-  if (burette.hovered()) {
+  } else if (burette.hovered()) {
     burette.mouseDragged();
-  }
-  if (stopcock.hovered()) {
-    stopcock.mouseDragged();
-  }
-  if (ppt.hovered()) {
+  } else if (ppt.hovered()) {
     ppt.mouseDragged();
   }
+  /*if (buretteRotated.hovered()) {
+   buretteRotated.mouseDragged();
+   }*/
 }
 
 void mouseReleased () {
 
   flask.mouseReleased ();
   burette.mouseReleased ();
-  stopcock.mouseReleased ();
+  //stopcock.mouseReleased ();
   ppt.mouseReleased();
+  // buretteRotated.mouseReleased();
+}
+void mouseClicked () {
+  if (mouseEvent.getClickCount () == 2) { // Double click
+
+    if (burette.hovered()) {
+      if (burette.shape == buretteUpright) {
+        burette.changeShape(buretteHorizontal);
+      } else {
+        burette.changeShape (buretteUpright);
+      }
+    }
+  }
 }

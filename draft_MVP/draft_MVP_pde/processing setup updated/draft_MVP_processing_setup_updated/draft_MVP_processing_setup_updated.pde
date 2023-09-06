@@ -23,7 +23,7 @@ void setup () {
   size (1366, 768);
 
   table = loadImage(tablepath);
-  
+
   cBeaker = loadImage (cBeakerPath);
 
   robotoM = createFont ("C:/Users/FSP/Downloads/Telegram Desktop/Roboto/Fonts/roboto-medium.ttf", 11);
@@ -38,7 +38,7 @@ void setup () {
 
   chemicals.active = true;
   litmuspaper = new LPButton ("", #077CDD, 775, 347);
-  
+
   // Cards
 
   beakers = new Cards ("BEAKERS", cBeakerPath, containers.fillColor, 49, 631);

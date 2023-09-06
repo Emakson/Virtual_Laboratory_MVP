@@ -4,7 +4,7 @@ void navigationBars_draw () {
   containers.draw ();
   indicators.draw ();
   tools.draw();
-   //LP buttons
+  //LP buttons
 
   //cards
   if (containers.active == true) {
@@ -31,7 +31,7 @@ void containers_draw () {
 
 
   container2.draw ();
-  
+
   if (litmuspaper.LPactive)
     litmuspaper.draw();
 }
@@ -93,7 +93,7 @@ void containers_mouseReleased () {
   }
   if (flask.hovered ()) {
     container.hold (flask);
-   // container.active = true;
+    // container.active = true;
   }
   if (testtube.hovered ()) {
     container.hold (testtube);

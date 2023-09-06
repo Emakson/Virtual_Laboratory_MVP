@@ -1,4 +1,4 @@
-//declaring cards class
+//declaring cards c
 class Cards {
   float x, y;
   float w = 120, h = 120;
