@@ -1,1 +1,1 @@
-This is the mini viable product for foka stem center's virtual laboratory project held in 2023
+This is a mini viable product for Foka STEM center virtual laboratory project held in 2023
